@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * Implements hook_preprocess_link().
+ */
 function enso_share_preprocess_link(&$vars) { 
 
   // Get link attributes
