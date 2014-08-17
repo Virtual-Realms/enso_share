@@ -1,0 +1,301 @@
+$legacy-support-for-ie6: true;
+$legacy-support-for-ie7: true;
+
+@import 'compass/support';                     // Add Compass and IE vendor prefix support variables.
+@import 'compass/css3';                        // Use one CSS3 mixin instead of multiple vendor prefixes.
+
+// Element-invisible improved and more robust
+@mixin element-invisible {
+  border: 0;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+    clip: rect(1px 1px 1px 1px); // IE6 and IE7 use the wrong syntax
+  }
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+// Foreground color
+$fore_color:            #ffffff;
+$fore_color_hover:      #000000;
+
+// Social media corporate colors
+$delicious_color:       #0b79e5;
+$digg_color:            #356aa0;
+$facebook_color:        #3b5998;
+$flickr_color:          #ff0084;
+$foursquare_color:      #0072b1;
+$googleplus_color:      #dd4b39;
+$instagram_color:       #517fa4;
+$linkedin_color:        #007bb6;
+$pinterest_color:       #cb2027;
+$reddit_color:          #ff4006;
+$stumbleupon_color:     #eb4923;
+$tumblr_color:          #32506d;
+$twitter_color:         #00aced;
+$vimeo_color:           #aad450;
+$yahoo_color:           #7b0097;
+$youtube_color:         #bb0000;
+
+// RSS news feed color
+$rss_color:             #ff7010;
+
+// Print, email & PDF colors
+$print_color:           #deb887;
+$printmail_color:       #deb887;
+$printpdf_color:        #deb887;
+
+// Monochrome colors
+$mono_follow_color:     #666666;
+$mono_service_color:    #666666;
+
+// Use monochrome color
+$use_mono_follow_color: true;
+$use_mono_service_color:false;
+
+// Hide or show link text
+$hide_link_text:        false;
+
+// Hover & focus state lighten percentage
+$lighten_by:            20%;
+
+// Common border radius
+$radius:                10px;
+
+// Margins & padding
+$margins:               5px;
+$padding:               10px;
+ 
+
+/* Hide or show link text */
+.follow-link-text,
+.service-links-text {
+  @if $hide_link_text {
+    @include element-invisible;
+  } @else {
+    vertical-align: middle;
+    padding: 0 $padding;
+    font-weight: bold;
+  }
+}
+
+/* Get rid of default Follow background image icon */
+.follow-links a.follow-link {
+  background-image: none;
+}
+
+/* Set icon size */
+.follow-link-icon,
+.service-links-icon {
+  font-size: 2em;
+  width: 32px;
+  vertical-align: middle;
+}
+
+/* Common icon styles */
+.follow-links a,
+.service-links a {
+  //@include border-radius($radius);
+  @include border-corner-radius(top, left, $radius);
+  //@include border-corner-radius(top, right, $radius);
+  //@include border-corner-radius(bottom, left, $radius);
+  @include border-corner-radius(bottom, right, $radius);
+  @include transition(color 0.3s ease-in-out, background-color 0.3s ease-in-out);
+  display: block;
+  padding: $padding;
+  margin: $margins;
+  color: $fore_color;
+  text-align: center;
+  float: left;
+
+  &:hover, &:focus {
+    text-decoration: none;
+    color: $fore_color_hover;
+  }
+}
+
+/* Remove left and right margins from either end of icon set */
+.follow-link-wrapper,
+.service-links ul.links li {
+  &:first-child a {
+    margin-left: 0;
+  }
+
+  &:last-child a {
+    margin-right: 0;
+  }
+}
+
+/* Follow module icon styles and states */
+@if $use_mono_follow_color {
+  a.follow-link {
+      background-color: $mono_follow_color;
+      &:hover, &:focus {
+        background-color: lighten($mono_follow_color, $lighten_by);
+      }
+  }
+} @else {
+  a {
+    &.follow-link-this-site {
+      background-color: $rss_color;
+      &:hover, &:focus {
+        background-color: lighten($rss_color, $lighten_by);
+      }
+    }
+     
+    &.follow-link-facebook {
+      background-color: $facebook_color;
+      &:hover, &:focus {
+        background-color: lighten($facebook_color, $lighten_by);
+      }
+    }
+     
+    &.follow-link-googleplus {
+      background-color: $googleplus_color;
+      &:hover, &:focus {
+        background-color: lighten($googleplus_color, $lighten_by);
+      }
+    }
+     
+    &.follow-link-instagram {
+      background-color: $instagram_color;
+      &:hover, &:focus {
+        background-color: lighten($instagram_color, $lighten_by);
+      }
+    }
+
+    &.follow-link-linkedin {
+      background-color: $linkedin_color;
+      &:hover, &:focus {
+        background-color: lighten($linkedin_color, $lighten_by);
+      }
+    }
+     
+    &.follow-link-pinterest {
+      background-color: $pinterest_color;
+      &:hover, &:focus {
+        background-color: lighten($pinterest_color, $lighten_by);
+      }
+    }
+     
+    &.follow-link-twitter {
+      background-color: $twitter_color;
+      &:hover, &:focus {
+        background-color: lighten($twitter_color, $lighten_by);
+      }
+    }
+     
+    &.follow-link-youtube {
+      background-color: $youtube_color;
+      &:hover, &:focus {
+        background-color: lighten($youtube_color, $lighten_by);
+      }
+    }
+  }
+}
+
+/* Service Links module icon styles and states */
+@if $use_mono_service_color {
+  .service-links a {
+      background-color: $mono_service_color;
+      &:hover, &:focus {
+        background-color: lighten($mono_service_color, $lighten_by);
+      }
+  }
+} @else {
+  a {
+    &.service-links-delicious {
+      background-color: $delicious_color;
+      &:hover, &:focus {
+        background-color: lighten($delicious_color, $lighten_by);
+      }
+    }
+     
+    &.service-links-digg {
+      background-color: $digg_color;
+      &:hover, &:focus {
+        background-color: lighten($digg_color, $lighten_by);
+      }
+    }
+     
+    &.service-links-facebook {
+      background-color: $facebook_color;
+      &:hover, &:focus {
+        background-color: lighten($facebook_color, $lighten_by);
+      }
+    }
+     
+    &.service-links-google-plus {
+      background-color: $googleplus_color;
+      &:hover, &:focus {
+        background-color: lighten($googleplus_color, $lighten_by);
+      }
+    }
+     
+    &.service-links-linkedin {
+      background-color: $linkedin_color;
+      &:hover, &:focus {
+        background-color: lighten($linkedin_color, $lighten_by);
+      }
+    }
+     
+    &.service-links-pinterest {
+      background-color: $pinterest_color;
+      &:hover, &:focus {
+        background-color: lighten($pinterest_color, $lighten_by);
+      }
+    }
+     
+    &.service-links-reddit {
+      background-color: $reddit_color;
+      &:hover, &:focus {
+        background-color: lighten($reddit_color, $lighten_by);
+      }
+    }
+     
+    &.service-links-stumbleupon {
+      background-color: $stumbleupon_color;
+      &:hover, &:focus {
+        background-color: lighten($stumbleupon_color, $lighten_by);
+      }
+    }
+     
+    &.service-links-twitter {
+      background-color: $twitter_color;
+      &:hover, &:focus {
+        background-color: lighten($twitter_color, $lighten_by);
+      }
+    }
+     
+    &.service-links-yahoo {
+      background-color: $yahoo_color;
+      &:hover, &:focus {
+        background-color: lighten($yahoo_color, $lighten_by);
+      }
+    }
+
+    &.service-links-print {
+      background-color: $print_color;
+      &:hover, &:focus {
+        background-color: lighten($print_color, $lighten_by);
+      }
+    }
+
+    &.service-links-printmail {
+      background-color: $printmail_color;
+      &:hover, &:focus {
+        background-color: lighten($printmail_color, $lighten_by);
+      }
+    }
+
+    &.service-links-printpdf {
+      background-color: $printpdf_color;
+      &:hover, &:focus {
+        background-color: lighten($printpdf_color, $lighten_by);
+      }
+    }
+  }
+}
